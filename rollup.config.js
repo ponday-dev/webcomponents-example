@@ -9,13 +9,13 @@ export default {
     input: 'src/index.ts',
     output: [
         {
-            file: 'dist/index.esm.js',
+            file: 'lib/index.js',
             format: 'es'
         },
         {
-            file: 'dist/index.umd.js',
+            file: `lib/${pkg.name}.umd.js`,
             format: 'umd',
-            name: 'SampleElements'
+            name: pkg.name
         }
     ],
     external: [
