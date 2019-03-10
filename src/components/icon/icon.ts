@@ -1,5 +1,6 @@
-import { LitElement, property, css } from 'lit-element';
+import { LitElement, property, html, css } from 'lit-element';
 import { arrowUp, arrowDown, arrowRight, arrowLeft, arrowUpRight, arrowUpLeft, arrowDownLeft, arrowDownRight } from './icons/arrow';
+import { angleUp, angleDown, angleRight, angleLeft } from './icons/angle';
 import style from './style.scss';
 
 export type IconTypes =
@@ -11,6 +12,10 @@ export type IconTypes =
     | 'arrow-up-left'
     | 'arrow-down-right'
     | 'arrow-down-left'
+    | 'angle-up'
+    | 'angle-right'
+    | 'angle-down'
+    | 'angle-left'
     ;
 
 export class Icon extends LitElement {
@@ -36,7 +41,14 @@ export class Icon extends LitElement {
 
     render() {
         const renderer = lookup(this.type);
-        return renderer(this);
+        return html`
+            <style>
+                :host {
+                    height: ${this.size}px;
+                }
+            </style>
+            ${renderer(this)}
+        `;
     }
 
     static use(name = 'lm-icon') {
@@ -62,5 +74,13 @@ function lookup(key: IconTypes) {
             return arrowDownLeft;
         case 'arrow-down-right':
             return arrowDownRight;
+        case 'angle-up':
+            return angleUp;
+        case 'angle-right':
+            return angleRight;
+        case 'angle-down':
+            return angleDown;
+        case 'angle-left':
+            return angleLeft;
     }
 }
