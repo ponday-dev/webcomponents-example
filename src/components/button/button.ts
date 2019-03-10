@@ -1,5 +1,6 @@
 import { LitElement, html, css, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined';
 import staticStyle from './style.scss';
 import { Colors } from '~/theme';
 
@@ -11,6 +12,9 @@ export class Button extends LitElement {
     @property({ type: String })
     color?: Colors;
 
+    @property({ type: Boolean })
+    disabled = false;
+
     static styles = staticStyle({ css });
 
     render() {
@@ -20,10 +24,9 @@ export class Button extends LitElement {
             [`color-${this.color}`]: this.color
         };
         return html`
-            <button class=${classMap(classes)}>
+            <button class=${classMap(classes)} disabled=${ifDefined(this.disabled || undefined)}>
                 <slot></slot>
-            </button>
-        `
+            </button>        `
     }
 
     static use(name = 'lm-button') {

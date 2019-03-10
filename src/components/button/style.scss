@@ -10,9 +10,14 @@ button {
     font-family: $font-family;
     box-sizing: border-box;
 
-    &:not(.outlined) {
-        padding: 0.5rem 0.75rem;
+    &[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
     }
+}
+
+:not(.outlined) {
+    padding: 0.5rem 0.75rem;
 }
 
 slot, ::slotted {
@@ -28,7 +33,7 @@ slot, ::slotted {
     &:not(.color) {
         border-color: #dbdbdb;
 
-        &:hover {
+        &:not([disabled]):hover {
             border-color: #b5b5b5;
         }
     }
@@ -39,7 +44,7 @@ slot, ::slotted {
                 color: var(--color-#{$name}, $color);
                 border-color: var(--color-#{$name}, $color);
 
-                &:hover {
+                &:not([disabled]):hover {
                     color: var(--color-light, $color-light);
                     background: var(--color-#{$name}, $color);
                 }
@@ -56,7 +61,7 @@ slot, ::slotted {
         &.color-#{$name} {
             background: var(--color-#{$name}, $color);
 
-            &:hover {
+            &:not([disabled]):hover {
                 background: var(--color-#{$name}-lighten, lighten($color, 10%));
             }
         }
