@@ -3,6 +3,8 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
+import tsConfigPaths from 'rollup-plugin-ts-paths';
+import litSass from '@ponday/rollup-plugin-lit-sass';
 import pkg from './package.json';
 
 export default {
@@ -24,6 +26,12 @@ export default {
     plugins: [
         typescript({
             typescript: require('typescript')
+        }),
+        tsConfigPaths(),
+        litSass({
+            includePaths: [
+                'src/styles'
+            ]
         }),
         nodeResolve(),
         commonjs(),

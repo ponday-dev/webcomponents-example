@@ -11,12 +11,16 @@
         "sourceMap": true,
         "target": "es6",
         "typeRoots": [
-            "node"
+            "node",
+            "@types"
         ],
         "experimentalDecorators": true,
         "declaration": true,
         "declarationDir": "./dist",
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "paths": {
+            "~/*": ["*"]
+        }
     },
     "include": [
         "src/**/*"
