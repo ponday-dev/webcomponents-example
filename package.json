@@ -4,7 +4,9 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build": "rollup -c",
+    "build:es": "BUILD_TYPE=es rollup -c",
+    "build:umd": "BUILD_TYPE=umd rollup -c",
+    "build": "BUILD_TYPE=all rollup -c",
     "watch": "rollup -cw"
   },
   "keywords": [],

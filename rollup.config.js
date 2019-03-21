@@ -9,16 +9,49 @@ import pkg from './package.json';
 
 const fs = require('fs');
 
-const filelist = fs.readdirSync('./src/umd-entries')
-    .filter(file => fs.statSync(`./src/umd-entries/${file}`).isFile() && /.*\.ts$/.test(file))
-    .map(file => ({
-        input: `src/umd-entries/${file}`,
-        output: {
-            file: `lib/umd/${file.replace(/\.ts$/, '.umd.js')}`,
-            format: 'umd',
-            name: pkg.name
+function doBuild(type) {
+    return () => process.env.BUILD_TYPE === type; 
+}
+const doBuildUmd = doBuild('umd');
+const doBuildEs = doBuild('es');
+const doBuildAll = doBuild('all');
+
+function getEsEntries() {
+    return [
+        {
+            input: 'src/index.ts',
+            output: [
+                { file: 'lib/index.js', format: 'es' }
+            ]
         }
-    }));
+    ];
+}
+
+function getUmdEntries(dir) {
+    return fs.readdirSync(dir)
+        .filter(file => fs.statSync(`${dir}/${file}`).isFile() && /.*\.ts$/.test(file))
+        .map(file => ({
+            input: `${dir}/${file}`,
+            output: {
+                file: `lib/umd/${file.replace(/\.ts$/, '.umd.js')}`,
+                format: 'umd',
+                name: pkg.name
+            }
+        }));
+}
+
+function getEntries() {
+    let entries = [];
+
+    if (doBuildAll() || doBuildEs()) {
+        entries = [ ...entries, ...getEsEntries()];
+    }
+    if (doBuildAll() || doBuildUmd()) {
+        entries = [ ...entries, ...getUmdEntries('src/umd-entries')];   
+    }
+
+    return entries;
+}
 
 const base = {
     external: [
@@ -41,14 +74,4 @@ const base = {
     ]
 };
 
-const entries = [
-    {
-        input: 'src/index.ts',
-        output: [
-            { file: 'lib/index.js', format: 'es' }
-        ]
-    },
-    ...filelist
-]
-
-export default entries.map(entry => Object.assign({}, base, entry));
+export default getEntries().map(entry => Object.assign({}, base, entry));
