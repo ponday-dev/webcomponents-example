@@ -1,20 +1,28 @@
 $font-size: 14px;
 $font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 
-$color-primary: #1f74ff;
-$color-secondary: #7931b1;
-$color-danger: #ff4757;
-$color-success: #46c93a;
-$color-warning: #ffba00;
+$orange: #ea8400;
+$yellow: #eece05;
+$green: #04c868;
+$cyan: #00ccf0;
+$blue: #008fea;
+$purple: #9902be;
+$red: #de2406;
+
+$grey-darker: #353535;
+$grey-dark: #464646;
+$grey: #6b6b6b;
+$grey-light: #a5a5a5;
+$grey-lighter: #dddddd;
+
+$color-dark: #444444;
 $color-light: #f5f5f5;
-$color-dark: #1d1d1d;
 
 $colors: (
-    'primary': $color-primary,
-    'secondary': $color-secondary,
-    'danger': $color-danger,
-    'success': $color-success,
-    'warning': $color-warning,
-    'light': $color-light,
-    'dark': $color-dark
+    'primary': $blue,
+    'secondary': $cyan,
+    'danger': $red,
+    'success': $green,
+    'warning': $yellow,
+    'dark': $grey-dark
 );

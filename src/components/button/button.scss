@@ -9,6 +9,7 @@ button {
     font-size: $font-size;
     font-family: $font-family;
     box-sizing: border-box;
+    color: $color-dark;
 
     &[disabled] {
         opacity: 0.6;

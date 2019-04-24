@@ -1,7 +1,7 @@
 import { LitElement, html, css, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import staticStyle from './style.scss';
+import style from './button.scss';
 import { Colors } from '~/theme';
 
 export class Button extends LitElement {
@@ -15,7 +15,7 @@ export class Button extends LitElement {
     @property({ type: Boolean })
     disabled = false;
 
-    static styles = staticStyle({ css });
+    static styles = style({ css });
 
     render() {
         const classes = {
